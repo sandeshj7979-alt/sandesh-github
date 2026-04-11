@@ -1,9 +1,8 @@
-/* --- Add to your existing CSS --- */
-
-/* 1. Glassmorphism Border Glow Animation */
+/* --- Card Glow Animation --- */
 .card {
     position: relative;
     overflow: hidden;
+    backdrop-filter: blur(10px);
 }
 
 .card::before {
@@ -16,60 +15,95 @@
     background: linear-gradient(
         90deg,
         transparent,
-        rgba(0, 210, 255, 0.2),
+        rgba(0, 210, 255, 0.4),
         transparent
     );
-    transition: 0.5s;
+    animation: glowMove 3s linear infinite;
 }
 
-.card:hover::before {
-    left: 100%;
+@keyframes glowMove {
+    0% { left: -100%; }
+    100% { left: 100%; }
 }
 
-/* 2. Floating Background Particles (Bio-Tech Style) */
+/* --- Floating Particles --- */
 .particle {
     position: fixed;
-    background: var(--primary);
+    width: 6px;
+    height: 6px;
+    background: #00d2ff;
     border-radius: 50%;
-    pointer-events: none;
-    opacity: 0.3;
+    opacity: 0.4;
     z-index: -1;
-    filter: blur(1px);
+    animation: floatUp linear infinite;
 }
 
-/* 3. Hero Text Glitch Effect */
+@keyframes floatUp {
+    0% {
+        transform: translateY(100vh) scale(0.5);
+        opacity: 0;
+    }
+    50% { opacity: 0.5; }
+    100% {
+        transform: translateY(-10vh) scale(1);
+        opacity: 0;
+    }
+}
+
+/* --- Hero Glitch + Shine Effect --- */
 .hero h1 {
     font-size: 3.5rem;
     font-weight: 800;
     text-transform: uppercase;
     letter-spacing: 5px;
-    background: linear-gradient(to right, #fff, var(--primary), var(--secondary));
+    background: linear-gradient(90deg, #fff, #00d2ff, #ff00ff);
+    background-size: 200%;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    animation: textShine 5s linear infinite;
+    animation: textShine 4s linear infinite, glitch 2s infinite;
 }
 
+/* Shine Animation */
 @keyframes textShine {
-    0% { background-position: 0% 50%; }
-    100% { background-position: 200% 50%; }
+    0% { background-position: 0%; }
+    100% { background-position: 200%; }
 }
 
-/* 4. Section Title Underline Animation */
+/* Glitch Effect */
+@keyframes glitch {
+    0% { transform: translate(0); }
+    20% { transform: translate(-2px, 2px); }
+    40% { transform: translate(2px, -2px); }
+    60% { transform: translate(-1px, 1px); }
+    80% { transform: translate(1px, -1px); }
+    100% { transform: translate(0); }
+}
+
+/* --- Section Title Underline --- */
+.section-title {
+    position: relative;
+    display: inline-block;
+}
+
 .section-title::after {
     content: '';
-    display: block;
+    position: absolute;
+    left: 0;
+    bottom: -5px;
     width: 0;
     height: 3px;
-    background: var(--primary);
-    transition: width 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    margin-top: 10px;
+    background: #00d2ff;
+    transition: 0.6s;
 }
 
 .reveal.active .section-title::after {
-    width: 100px;
+    width: 100%;
 }
 
-/* Mobile Enhancement */
+/* --- Mobile Optimization --- */
 @media (max-width: 768px) {
-    .hero h1 { font-size: 2.2rem; letter-spacing: 2px; }
+    .hero h1 {
+        font-size: 2.2rem;
+        letter-spacing: 2px;
+    }
 }

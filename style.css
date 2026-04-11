@@ -1,119 +1,75 @@
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;600;800&family=Fira+Code:wght@400&display=swap');
+/* --- Add to your existing CSS --- */
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Outfit', sans-serif;
-}
-
-:root {
-    --primary: #00d2ff;
-    --secondary: #3a7bd5;
-    --bg: #030a16;
-    --card-glass: rgba(255, 255, 255, 0.03);
-    --border: rgba(255, 255, 255, 0.1);
-}
-
-body {
-    background-color: var(--bg);
-    color: white;
-    overflow-x: hidden;
-    line-height: 1.6;
-}
-
-/* --- DNA Scroll Progress --- */
-#scroll-progress {
-    position: fixed;
-    top: 0;
-    right: 5px;
-    width: 4px;
-    height: 0%;
-    background: linear-gradient(to bottom, var(--primary), var(--secondary));
-    box-shadow: 0 0 15px var(--primary);
-    z-index: 10001;
-    border-radius: 10px;
-}
-
-/* --- Liquid Blob Profile --- */
-.profile-container {
-    width: 200px;
-    height: 200px;
-    margin: 0 auto 20px;
-    background: linear-gradient(45deg, var(--primary), var(--secondary));
-    padding: 5px;
-    animation: morphing 8s infinite alternate, float 4s ease-in-out infinite;
+/* 1. Glassmorphism Border Glow Animation */
+.card {
+    position: relative;
     overflow: hidden;
-    box-shadow: 0 0 30px rgba(0, 210, 255, 0.3);
 }
 
-@keyframes morphing {
-    0% { border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; }
-    50% { border-radius: 50% 50% 33% 67% / 55% 27% 73% 45%; }
-    100% { border-radius: 33% 67% 58% 42% / 63% 68% 32% 37%; }
-}
-
-@keyframes float {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-15px); }
-}
-
-.profile-img {
+.card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
     width: 100%;
     height: 100%;
-    object-fit: cover;
-    border-radius: inherit;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(0, 210, 255, 0.2),
+        transparent
+    );
+    transition: 0.5s;
 }
 
-/* --- 3D Magnetic Cards --- */
-.grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 30px;
-    padding: 40px 10%;
+.card:hover::before {
+    left: 100%;
 }
 
-.card {
-    background: var(--card-glass);
-    backdrop-filter: blur(15px);
-    border: 1px solid var(--border);
-    border-radius: 20px;
-    padding: 20px;
-    transition: 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
-    transform-style: preserve-3d;
+/* 2. Floating Background Particles (Bio-Tech Style) */
+.particle {
+    position: fixed;
+    background: var(--primary);
+    border-radius: 50%;
+    pointer-events: none;
+    opacity: 0.3;
+    z-index: -1;
+    filter: blur(1px);
 }
 
-.card:hover {
-    border-color: var(--primary);
-    background: rgba(0, 210, 255, 0.05);
+/* 3. Hero Text Glitch Effect */
+.hero h1 {
+    font-size: 3.5rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 5px;
+    background: linear-gradient(to right, #fff, var(--primary), var(--secondary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: textShine 5s linear infinite;
 }
 
-/* Heartbeat Pulse for project images */
-.project-img {
-    width: 100%;
-    border-radius: 12px;
-    animation: heartbeat 4s ease-in-out infinite;
-    transform: translateZ(20px);
+@keyframes textShine {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 200% 50%; }
 }
 
-@keyframes heartbeat {
-    0%, 100% { transform: scale(1) translateZ(20px); }
-    50% { transform: scale(1.03) translateZ(30px); }
+/* 4. Section Title Underline Animation */
+.section-title::after {
+    content: '';
+    display: block;
+    width: 0;
+    height: 3px;
+    background: var(--primary);
+    transition: width 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    margin-top: 10px;
 }
 
-/* --- Reveal Stagger --- */
-.reveal {
-    opacity: 0;
-    transform: translateY(30px);
-    transition: 0.8s ease-out;
+.reveal.active .section-title::after {
+    width: 100px;
 }
 
-.reveal.active {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-/* --- Mobile Fixes --- */
+/* Mobile Enhancement */
 @media (max-width: 768px) {
-    .section-title { font-size: 2rem; }
+    .hero h1 { font-size: 2.2rem; letter-spacing: 2px; }
 }

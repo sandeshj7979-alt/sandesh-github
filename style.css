@@ -1,41 +1,85 @@
-/* ------------------ GLASSMORPHISM CARD ------------------ */
-.card {
-    position: relative;
-    background: rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(12px);
-    border-radius: 15px;
-    border: 1px solid rgba(255,255,255,0.1);
-    overflow: hidden;
-}
-
-/* ------------------ CARD GLOW BORDER ANIMATION ------------------ */
-.card::before {
+/* ------------------ RAINBOW GLOW BORDER ------------------ */
+.card::after {
     content: '';
     position: absolute;
-    inset: 0;
+    inset: -2px;
+    border-radius: 15px;
     background: linear-gradient(
-        120deg,
-        transparent,
-        rgba(0, 210, 255, 0.6),
-        transparent
+        270deg,
+        #00d2ff,
+        #ff00ff,
+        #00ff88,
+        #ffcc00,
+        #00d2ff
     );
-    transform: translateX(-100%);
-    animation: glowMove 4s linear infinite;
+    background-size: 400%;
+    z-index: -1;
+    animation: borderGlow 6s linear infinite;
+    filter: blur(10px);
+    opacity: 0.6;
 }
 
-@keyframes glowMove {
-    to {
-        transform: translateX(100%);
-    }
+@keyframes borderGlow {
+    0% { background-position: 0% }
+    100% { background-position: 400% }
 }
 
-/* ------------------ BUTTON SHINE EFFECT ------------------ */
+/* ------------------ COLOR SHIFT TEXT ------------------ */
+.hero h1 {
+    background: linear-gradient(
+        90deg,
+        #00d2ff,
+        #ff00ff,
+        #00ff88,
+        #ffffff
+    );
+    background-size: 300%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: textColorFlow 6s linear infinite;
+}
+
+@keyframes textColorFlow {
+    0% { background-position: 0% }
+    100% { background-position: 300% }
+}
+
+/* ------------------ BUTTON GLOW PULSE ------------------ */
 button, .btn {
-    position: relative;
-    overflow: hidden;
+    transition: 0.3s;
 }
 
-button::before, .btn::before {
+button:hover, .btn:hover {
+    box-shadow: 0 0 10px #00d2ff,
+                0 0 20px #ff00ff,
+                0 0 30px #00ff88;
+}
+
+/* ------------------ MOUSE FOLLOW GLOW ------------------ */
+body::before {
+    content: '';
+    position: fixed;
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle, rgba(0,210,255,0.3), transparent 70%);
+    pointer-events: none;
+    transform: translate(-50%, -50%);
+    transition: 0.1s;
+    z-index: 0;
+}
+
+/* ------------------ CARD HOVER 3D EFFECT ------------------ */
+.card {
+    transform-style: preserve-3d;
+    transition: transform 0.4s;
+}
+
+.card:hover {
+    transform: rotateX(5deg) rotateY(5deg) scale(1.03);
+}
+
+/* ------------------ IMAGE SHINE SWEEP ------------------ */
+.project-img::after {
     content: '';
     position: absolute;
     inset: 0;
@@ -48,107 +92,32 @@ button::before, .btn::before {
     transform: translateX(-100%);
 }
 
-button:hover::before, .btn:hover::before {
-    animation: shine 0.8s;
+.card:hover .project-img::after {
+    animation: shineImg 1s;
 }
 
-@keyframes shine {
+@keyframes shineImg {
     to {
         transform: translateX(100%);
     }
 }
 
-/* ------------------ FLOATING PARTICLES ------------------ */
-.particle {
-    position: fixed;
-    width: 5px;
-    height: 5px;
-    background: #00d2ff;
-    border-radius: 50%;
-    opacity: 0.5;
-    z-index: -1;
-    animation: floatUp linear infinite;
+/* ------------------ NAVBAR GLOW ------------------ */
+nav.scrolled {
+    box-shadow: 0 0 10px #00d2ff,
+                0 0 20px rgba(0,210,255,0.5);
 }
 
-@keyframes floatUp {
-    0% {
-        transform: translateY(100vh) scale(0.5);
-        opacity: 0;
-    }
-    50% { opacity: 0.6; }
-    100% {
-        transform: translateY(-10vh) scale(1);
-        opacity: 0;
-    }
+/* ------------------ SCROLLBAR STYLING ------------------ */
+::-webkit-scrollbar {
+    width: 8px;
 }
 
-/* ------------------ IMAGE HOVER ZOOM + OVERLAY ------------------ */
-.project-img {
-    transition: 0.5s;
+::-webkit-scrollbar-track {
+    background: #111;
 }
 
-.card:hover .project-img {
-    transform: scale(1.1);
-    filter: brightness(0.7);
-}
-
-/* ------------------ TEXT FADE-IN DELAY ------------------ */
-.card h3, .card p {
-    opacity: 0;
-    transform: translateY(20px);
-    transition: 0.5s;
-}
-
-.card:hover h3 {
-    opacity: 1;
-    transform: translateY(0);
-    transition-delay: 0.2s;
-}
-
-.card:hover p {
-    opacity: 1;
-    transform: translateY(0);
-    transition-delay: 0.4s;
-}
-
-/* ------------------ NAV LINK HOVER UNDERLINE ------------------ */
-.nav-links a {
-    position: relative;
-}
-
-.nav-links a::after {
-    content: '';
-    position: absolute;
-    width: 0%;
-    height: 2px;
-    bottom: -3px;
-    left: 0;
-    background: #00d2ff;
-    transition: 0.4s;
-}
-
-.nav-links a:hover::after {
-    width: 100%;
-}
-
-/* ------------------ FLOATING PROFILE EFFECT ------------------ */
-.profile-container {
-    animation: float 4s ease-in-out infinite;
-}
-
-@keyframes float {
-    0% { transform: translateY(0px); }
-    50% { transform: translateY(-15px); }
-    100% { transform: translateY(0px); }
-}
-
-/* ------------------ SCROLL PROGRESS BAR ------------------ */
-#progress-bar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    height: 4px;
-    background: #00d2ff;
-    width: 0%;
-    z-index: 9999;
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(#00d2ff, #ff00ff);
+    border-radius: 10px;
 }

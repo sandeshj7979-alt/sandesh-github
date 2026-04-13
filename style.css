@@ -7,23 +7,83 @@
     text-align: center;
     position: relative;
     z-index: 1;
+    overflow: hidden;
 }
 
-/* CONTENT */
+/* ------------------ ANIMATED BACKGROUND ------------------ */
+.hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        -45deg,
+        #00d2ff,
+        #ff00ff,
+        #00ff88,
+        #ffcc00,
+        #00d2ff
+    );
+    background-size: 400% 400%;
+    animation: gradientMove 10s ease infinite;
+    opacity: 0.15;
+    z-index: -1;
+}
+
+@keyframes gradientMove {
+    0% { background-position: 0% }
+    50% { background-position: 100% }
+    100% { background-position: 0% }
+}
+
+/* ------------------ CONTENT ------------------ */
 .hero-content {
-    animation: fadeInUp 1.2s ease;
+    animation: fadeInUp 1.2s ease, floatHero 5s ease-in-out infinite;
 }
 
-/* PROFILE IMAGE */
+/* ------------------ COLORFUL TEXT ------------------ */
+.hero h1 {
+    font-size: 3rem;
+    background: linear-gradient(
+        90deg,
+        #00d2ff,
+        #ff00ff,
+        #00ff88,
+        #ffffff
+    );
+    background-size: 300%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: textFlow 5s linear infinite;
+}
+
+@keyframes textFlow {
+    0% { background-position: 0% }
+    100% { background-position: 300% }
+}
+
+/* ------------------ PROFILE IMAGE GLOW ------------------ */
 .profile-img {
     width: 150px;
     height: 150px;
     object-fit: cover;
     margin-bottom: 20px;
     border-radius: 50%;
+    animation: glowPulse 3s infinite alternate;
 }
 
-/* SUBTITLE */
+@keyframes glowPulse {
+    0% {
+        box-shadow: 0 0 10px #00d2ff;
+    }
+    100% {
+        box-shadow: 
+            0 0 20px #00d2ff,
+            0 0 30px #ff00ff,
+            0 0 40px #00ff88;
+    }
+}
+
+/* ------------------ SUBTITLE ------------------ */
 .subtitle {
     font-size: 1.2rem;
     margin: 10px 0 20px;
@@ -31,7 +91,7 @@
     letter-spacing: 1px;
 }
 
-/* BUTTONS */
+/* ------------------ BUTTONS ------------------ */
 .hero-buttons {
     margin-top: 20px;
 }
@@ -39,6 +99,25 @@
 .hero-buttons .btn {
     margin: 10px;
     display: inline-block;
+    padding: 10px 20px;
+    border-radius: 25px;
+    background: linear-gradient(270deg, #00d2ff, #ff00ff, #00ff88);
+    background-size: 300%;
+    animation: btnFlow 5s linear infinite;
+    transition: 0.3s;
+}
+
+.hero-buttons .btn:hover {
+    transform: scale(1.1);
+    box-shadow: 
+        0 0 10px #00d2ff,
+        0 0 20px #ff00ff,
+        0 0 30px #00ff88;
+}
+
+@keyframes btnFlow {
+    0% { background-position: 0% }
+    100% { background-position: 300% }
 }
 
 /* ------------------ HERO ANIMATION ------------------ */
@@ -53,11 +132,7 @@
     }
 }
 
-/* ------------------ HERO FLOATING EFFECT ------------------ */
-.hero-content {
-    animation: floatHero 5s ease-in-out infinite;
-}
-
+/* ------------------ FLOAT EFFECT ------------------ */
 @keyframes floatHero {
     0% { transform: translateY(0px); }
     50% { transform: translateY(-15px); }

@@ -1,6 +1,9 @@
-const glow = document.querySelector("body::before");
+// MOUSE FOLLOW GLOW (WORKING FIX)
+const glow = document.createElement("div");
+glow.classList.add("mouse-glow");
+document.body.appendChild(glow);
 
 document.addEventListener("mousemove", (e) => {
-    document.body.style.setProperty('--x', e.clientX + 'px');
-    document.body.style.setProperty('--y', e.clientY + 'px');
+    glow.style.left = e.clientX + "px";
+    glow.style.top = e.clientY + "px";
 });

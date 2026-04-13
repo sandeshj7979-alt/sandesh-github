@@ -1,123 +1,129 @@
-/* ------------------ RAINBOW GLOW BORDER ------------------ */
-.card::after {
+/* ------------------ EXTRA RAINBOW BORDER LAYER ------------------ */
+.card {
+    position: relative;
+    overflow: hidden;
+}
+
+.card::before {
     content: '';
     position: absolute;
-    inset: -2px;
+    inset: -3px;
     border-radius: 15px;
     background: linear-gradient(
-        270deg,
+        60deg,
         #00d2ff,
         #ff00ff,
         #00ff88,
         #ffcc00,
+        #ff0066,
         #00d2ff
     );
-    background-size: 400%;
-    z-index: -1;
-    animation: borderGlow 6s linear infinite;
-    filter: blur(10px);
-    opacity: 0.6;
+    background-size: 500%;
+    animation: ultraBorder 8s linear infinite;
+    z-index: -2;
+    filter: blur(15px);
+    opacity: 0.7;
 }
 
-@keyframes borderGlow {
+@keyframes ultraBorder {
     0% { background-position: 0% }
-    100% { background-position: 400% }
+    100% { background-position: 500% }
 }
 
-/* ------------------ COLOR SHIFT TEXT ------------------ */
+/* ------------------ TEXT GLOW PULSE ------------------ */
 .hero h1 {
+    text-shadow: 
+        0 0 10px #00d2ff,
+        0 0 20px #ff00ff,
+        0 0 30px #00ff88;
+    animation: textPulse 2s infinite alternate;
+}
+
+@keyframes textPulse {
+    from {
+        text-shadow: 0 0 10px #00d2ff;
+    }
+    to {
+        text-shadow: 
+            0 0 20px #00d2ff,
+            0 0 30px #ff00ff,
+            0 0 40px #00ff88;
+    }
+}
+
+/* ------------------ BUTTON GRADIENT ANIMATION ------------------ */
+button, .btn {
     background: linear-gradient(
-        90deg,
+        270deg,
         #00d2ff,
         #ff00ff,
-        #00ff88,
-        #ffffff
+        #00ff88
     );
     background-size: 300%;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    animation: textColorFlow 6s linear infinite;
+    animation: btnFlow 5s linear infinite;
 }
 
-@keyframes textColorFlow {
+@keyframes btnFlow {
     0% { background-position: 0% }
     100% { background-position: 300% }
 }
 
-/* ------------------ BUTTON GLOW PULSE ------------------ */
-button, .btn {
-    transition: 0.3s;
+/* ------------------ IMAGE FLOAT + SCALE ------------------ */
+.project-img {
+    transition: transform 0.5s ease, filter 0.5s;
 }
 
-button:hover, .btn:hover {
-    box-shadow: 0 0 10px #00d2ff,
-                0 0 20px #ff00ff,
-                0 0 30px #00ff88;
+.card:hover .project-img {
+    transform: scale(1.1) rotate(1deg);
+    filter: brightness(0.8) contrast(1.2);
 }
 
-/* ------------------ MOUSE FOLLOW GLOW ------------------ */
-body::before {
+/* ------------------ NAVBAR COLOR SHIFT ------------------ */
+nav.scrolled {
+    background: linear-gradient(
+        90deg,
+        rgba(0,210,255,0.2),
+        rgba(255,0,255,0.2)
+    );
+    backdrop-filter: blur(12px);
+    animation: navGlow 4s linear infinite;
+}
+
+@keyframes navGlow {
+    0% { box-shadow: 0 0 10px #00d2ff; }
+    50% { box-shadow: 0 0 20px #ff00ff; }
+    100% { box-shadow: 0 0 10px #00ff88; }
+}
+
+/* ------------------ SMOOTH SECTION FADE ------------------ */
+section {
+    transition: all 0.6s ease;
+}
+
+/* ------------------ ICON COLOR ANIMATION ------------------ */
+.social-icons a {
+    animation: iconColor 4s linear infinite;
+}
+
+@keyframes iconColor {
+    0% { color: #00d2ff; }
+    33% { color: #ff00ff; }
+    66% { color: #00ff88; }
+    100% { color: #00d2ff; }
+}
+
+/* ------------------ EXTRA PARTICLE COLORS ------------------ */
+.particle:nth-child(4n) { background: #ff00ff; }
+.particle:nth-child(4n+1) { background: #00ff88; }
+.particle:nth-child(4n+2) { background: #ffcc00; }
+.particle:nth-child(4n+3) { background: #00d2ff; }
+
+/* ------------------ SOFT GLOW OVERLAY ------------------ */
+body::after {
     content: '';
     position: fixed;
-    width: 300px;
-    height: 300px;
-    background: radial-gradient(circle, rgba(0,210,255,0.3), transparent 70%);
-    pointer-events: none;
-    transform: translate(-50%, -50%);
-    transition: 0.1s;
-    z-index: 0;
-}
-
-/* ------------------ CARD HOVER 3D EFFECT ------------------ */
-.card {
-    transform-style: preserve-3d;
-    transition: transform 0.4s;
-}
-
-.card:hover {
-    transform: rotateX(5deg) rotateY(5deg) scale(1.03);
-}
-
-/* ------------------ IMAGE SHINE SWEEP ------------------ */
-.project-img::after {
-    content: '';
-    position: absolute;
     inset: 0;
-    background: linear-gradient(
-        120deg,
-        transparent,
-        rgba(255,255,255,0.4),
-        transparent
-    );
-    transform: translateX(-100%);
-}
-
-.card:hover .project-img::after {
-    animation: shineImg 1s;
-}
-
-@keyframes shineImg {
-    to {
-        transform: translateX(100%);
-    }
-}
-
-/* ------------------ NAVBAR GLOW ------------------ */
-nav.scrolled {
-    box-shadow: 0 0 10px #00d2ff,
-                0 0 20px rgba(0,210,255,0.5);
-}
-
-/* ------------------ SCROLLBAR STYLING ------------------ */
-::-webkit-scrollbar {
-    width: 8px;
-}
-
-::-webkit-scrollbar-track {
-    background: #111;
-}
-
-::-webkit-scrollbar-thumb {
-    background: linear-gradient(#00d2ff, #ff00ff);
-    border-radius: 10px;
+    background: radial-gradient(circle at center, rgba(255,255,255,0.05), transparent 70%);
+    pointer-events: none;
+    z-index: 0;
 }

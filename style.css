@@ -1,112 +1,154 @@
-/* ------------------ GLOBAL SMOOTH SCROLL ------------------ */
-html {
-    scroll-behavior: smooth;
-}
-
-/* ------------------ FADE + SLIDE ANIMATION ------------------ */
-.reveal {
-    opacity: 0;
-    transform: translateY(60px);
-    transition: all 0.8s ease;
-}
-
-.reveal.active {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-/* ------------------ HERO TEXT TYPING EFFECT ------------------ */
-.hero h1 {
-    overflow: hidden;
-    white-space: nowrap;
-    border-right: 3px solid #00d2ff;
-    width: 0;
-    animation: typing 3s steps(25, end) forwards, blink 0.7s infinite;
-}
-
-@keyframes typing {
-    from { width: 0 }
-    to { width: 100% }
-}
-
-@keyframes blink {
-    50% { border-color: transparent }
-}
-
-/* ------------------ PROFILE IMAGE GLOW ------------------ */
-.profile-img {
-    border-radius: 50%;
-    box-shadow: 0 0 20px rgba(0,210,255,0.6);
-    transition: 0.4s;
-}
-
-.profile-img:hover {
-    transform: scale(1.08);
-    box-shadow: 0 0 40px rgba(0,210,255,1);
-}
-
-/* ------------------ CARD HOVER EFFECT ------------------ */
+/* ------------------ GLASSMORPHISM CARD ------------------ */
 .card {
-    transition: 0.4s;
-    border-radius: 15px;
-}
-
-.card:hover {
-    transform: translateY(-10px) scale(1.02);
-    box-shadow: 0 15px 30px rgba(0, 210, 255, 0.3);
-}
-
-/* ------------------ BUTTON / ICON HOVER ------------------ */
-.social-icons a {
-    transition: 0.3s;
-}
-
-.social-icons a:hover {
-    color: #00d2ff;
-    transform: translateY(-5px) scale(1.2);
-}
-
-/* ------------------ NAVBAR SCROLL EFFECT ------------------ */
-nav {
-    transition: 0.4s;
-}
-
-nav.scrolled {
-    background: rgba(0,0,0,0.8);
-    backdrop-filter: blur(10px);
-}
-
-/* ------------------ SECTION TITLE ANIMATION ------------------ */
-.section-title {
     position: relative;
-    display: inline-block;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(12px);
+    border-radius: 15px;
+    border: 1px solid rgba(255,255,255,0.1);
+    overflow: hidden;
 }
 
-.section-title::after {
+/* ------------------ CARD GLOW BORDER ANIMATION ------------------ */
+.card::before {
     content: '';
     position: absolute;
-    width: 0%;
-    height: 3px;
-    left: 0;
-    bottom: -5px;
+    inset: 0;
+    background: linear-gradient(
+        120deg,
+        transparent,
+        rgba(0, 210, 255, 0.6),
+        transparent
+    );
+    transform: translateX(-100%);
+    animation: glowMove 4s linear infinite;
+}
+
+@keyframes glowMove {
+    to {
+        transform: translateX(100%);
+    }
+}
+
+/* ------------------ BUTTON SHINE EFFECT ------------------ */
+button, .btn {
+    position: relative;
+    overflow: hidden;
+}
+
+button::before, .btn::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        120deg,
+        transparent,
+        rgba(255,255,255,0.4),
+        transparent
+    );
+    transform: translateX(-100%);
+}
+
+button:hover::before, .btn:hover::before {
+    animation: shine 0.8s;
+}
+
+@keyframes shine {
+    to {
+        transform: translateX(100%);
+    }
+}
+
+/* ------------------ FLOATING PARTICLES ------------------ */
+.particle {
+    position: fixed;
+    width: 5px;
+    height: 5px;
     background: #00d2ff;
+    border-radius: 50%;
+    opacity: 0.5;
+    z-index: -1;
+    animation: floatUp linear infinite;
+}
+
+@keyframes floatUp {
+    0% {
+        transform: translateY(100vh) scale(0.5);
+        opacity: 0;
+    }
+    50% { opacity: 0.6; }
+    100% {
+        transform: translateY(-10vh) scale(1);
+        opacity: 0;
+    }
+}
+
+/* ------------------ IMAGE HOVER ZOOM + OVERLAY ------------------ */
+.project-img {
     transition: 0.5s;
 }
 
-.reveal.active .section-title::after {
+.card:hover .project-img {
+    transform: scale(1.1);
+    filter: brightness(0.7);
+}
+
+/* ------------------ TEXT FADE-IN DELAY ------------------ */
+.card h3, .card p {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: 0.5s;
+}
+
+.card:hover h3 {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: 0.2s;
+}
+
+.card:hover p {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: 0.4s;
+}
+
+/* ------------------ NAV LINK HOVER UNDERLINE ------------------ */
+.nav-links a {
+    position: relative;
+}
+
+.nav-links a::after {
+    content: '';
+    position: absolute;
+    width: 0%;
+    height: 2px;
+    bottom: -3px;
+    left: 0;
+    background: #00d2ff;
+    transition: 0.4s;
+}
+
+.nav-links a:hover::after {
     width: 100%;
 }
 
-/* ------------------ BACKGROUND GRADIENT ANIMATION ------------------ */
-body {
-    background: linear-gradient(-45deg, #0f2027, #203a43, #2c5364, #000);
-    background-size: 400% 400%;
-    animation: gradientBG 10s ease infinite;
-    color: white;
+/* ------------------ FLOATING PROFILE EFFECT ------------------ */
+.profile-container {
+    animation: float 4s ease-in-out infinite;
 }
 
-@keyframes gradientBG {
-    0% { background-position: 0% }
-    50% { background-position: 100% }
-    100% { background-position: 0% }
+@keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-15px); }
+    100% { transform: translateY(0px); }
+}
+
+/* ------------------ SCROLL PROGRESS BAR ------------------ */
+#progress-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 4px;
+    background: #00d2ff;
+    width: 0%;
+    z-index: 9999;
 }

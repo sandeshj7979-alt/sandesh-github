@@ -1,129 +1,65 @@
-/* ------------------ EXTRA RAINBOW BORDER LAYER ------------------ */
-.card {
+/* ------------------ HERO SECTION ------------------ */
+.hero {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
     position: relative;
-    overflow: hidden;
+    z-index: 1;
 }
 
-.card::before {
-    content: '';
-    position: absolute;
-    inset: -3px;
-    border-radius: 15px;
-    background: linear-gradient(
-        60deg,
-        #00d2ff,
-        #ff00ff,
-        #00ff88,
-        #ffcc00,
-        #ff0066,
-        #00d2ff
-    );
-    background-size: 500%;
-    animation: ultraBorder 8s linear infinite;
-    z-index: -2;
-    filter: blur(15px);
-    opacity: 0.7;
+/* CONTENT */
+.hero-content {
+    animation: fadeInUp 1.2s ease;
 }
 
-@keyframes ultraBorder {
-    0% { background-position: 0% }
-    100% { background-position: 500% }
+/* PROFILE IMAGE */
+.profile-img {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    margin-bottom: 20px;
+    border-radius: 50%;
 }
 
-/* ------------------ TEXT GLOW PULSE ------------------ */
-.hero h1 {
-    text-shadow: 
-        0 0 10px #00d2ff,
-        0 0 20px #ff00ff,
-        0 0 30px #00ff88;
-    animation: textPulse 2s infinite alternate;
+/* SUBTITLE */
+.subtitle {
+    font-size: 1.2rem;
+    margin: 10px 0 20px;
+    color: #ccc;
+    letter-spacing: 1px;
 }
 
-@keyframes textPulse {
+/* BUTTONS */
+.hero-buttons {
+    margin-top: 20px;
+}
+
+.hero-buttons .btn {
+    margin: 10px;
+    display: inline-block;
+}
+
+/* ------------------ HERO ANIMATION ------------------ */
+@keyframes fadeInUp {
     from {
-        text-shadow: 0 0 10px #00d2ff;
+        opacity: 0;
+        transform: translateY(40px);
     }
     to {
-        text-shadow: 
-            0 0 20px #00d2ff,
-            0 0 30px #ff00ff,
-            0 0 40px #00ff88;
+        opacity: 1;
+        transform: translateY(0);
     }
 }
 
-/* ------------------ BUTTON GRADIENT ANIMATION ------------------ */
-button, .btn {
-    background: linear-gradient(
-        270deg,
-        #00d2ff,
-        #ff00ff,
-        #00ff88
-    );
-    background-size: 300%;
-    animation: btnFlow 5s linear infinite;
+/* ------------------ HERO FLOATING EFFECT ------------------ */
+.hero-content {
+    animation: floatHero 5s ease-in-out infinite;
 }
 
-@keyframes btnFlow {
-    0% { background-position: 0% }
-    100% { background-position: 300% }
-}
-
-/* ------------------ IMAGE FLOAT + SCALE ------------------ */
-.project-img {
-    transition: transform 0.5s ease, filter 0.5s;
-}
-
-.card:hover .project-img {
-    transform: scale(1.1) rotate(1deg);
-    filter: brightness(0.8) contrast(1.2);
-}
-
-/* ------------------ NAVBAR COLOR SHIFT ------------------ */
-nav.scrolled {
-    background: linear-gradient(
-        90deg,
-        rgba(0,210,255,0.2),
-        rgba(255,0,255,0.2)
-    );
-    backdrop-filter: blur(12px);
-    animation: navGlow 4s linear infinite;
-}
-
-@keyframes navGlow {
-    0% { box-shadow: 0 0 10px #00d2ff; }
-    50% { box-shadow: 0 0 20px #ff00ff; }
-    100% { box-shadow: 0 0 10px #00ff88; }
-}
-
-/* ------------------ SMOOTH SECTION FADE ------------------ */
-section {
-    transition: all 0.6s ease;
-}
-
-/* ------------------ ICON COLOR ANIMATION ------------------ */
-.social-icons a {
-    animation: iconColor 4s linear infinite;
-}
-
-@keyframes iconColor {
-    0% { color: #00d2ff; }
-    33% { color: #ff00ff; }
-    66% { color: #00ff88; }
-    100% { color: #00d2ff; }
-}
-
-/* ------------------ EXTRA PARTICLE COLORS ------------------ */
-.particle:nth-child(4n) { background: #ff00ff; }
-.particle:nth-child(4n+1) { background: #00ff88; }
-.particle:nth-child(4n+2) { background: #ffcc00; }
-.particle:nth-child(4n+3) { background: #00d2ff; }
-
-/* ------------------ SOFT GLOW OVERLAY ------------------ */
-body::after {
-    content: '';
-    position: fixed;
-    inset: 0;
-    background: radial-gradient(circle at center, rgba(255,255,255,0.05), transparent 70%);
-    pointer-events: none;
-    z-index: 0;
+@keyframes floatHero {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-15px); }
+    100% { transform: translateY(0px); }
 }

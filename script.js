@@ -1,118 +1,35 @@
-// ------------------ SMOOTH SCROLL ------------------
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function(e) {
-        e.preventDefault();
+// ------------------ MATRIX RAIN ------------------
+const canvas = document.getElementById("matrix");
+const ctx = canvas.getContext("2d");
 
-        document.querySelector(this.getAttribute('href')).scrollIntoView({
-            behavior: 'smooth'
-        });
-    });
-});
+canvas.height = window.innerHeight;
+canvas.width = window.innerWidth;
 
+const letters = "01ABCDEFGHIJKLMNOPQRSTUVWXYZ#$%&";
+const fontSize = 14;
+const columns = canvas.width / fontSize;
 
-// ------------------ TYPING EFFECT ------------------
-const text = ["Web Developer", "Designer", "Freelancer"];
-let count = 0;
-let index = 0;
-let currentText = "";
-let letter = "";
+const drops = [];
+for (let x = 0; x < columns; x++) {
+    drops[x] = 1;
+}
 
-function type() {
-    if (count === text.length) {
-        count = 0;
-    }
+function drawMatrix() {
+    ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-    currentText = text[count];
-    letter = currentText.slice(0, ++index);
+    ctx.fillStyle = "#00ff9f";
+    ctx.font = fontSize + "px monospace";
 
-    document.querySelector(".typing").textContent = letter;
+    for (let i = 0; i < drops.length; i++) {
+        const text = letters[Math.floor(Math.random() * letters.length)];
+        ctx.fillText(text, i * fontSize, drops[i] * fontSize);
 
-    if (letter.length === currentText.length) {
-        count++;
-        index = 0;
-        setTimeout(type, 1000);
-    } else {
-        setTimeout(type, 100);
+        if (drops[i] * fontSize > canvas.height || Math.random() > 0.95) {
+            drops[i] = 0;
+        }
+        drops[i]++;
     }
 }
 
-type();
-
-
-// ------------------ SCROLL ANIMATION ------------------
-const observer = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.classList.add("show");
-        }
-    });
-}, {
-    threshold: 0.2
-});
-
-document.querySelectorAll(".hidden").forEach(el => {
-    observer.observe(el);
-});
-
-
-// ------------------ NAVBAR SCROLL EFFECT ------------------
-window.addEventListener("scroll", () => {
-    const nav = document.querySelector("nav");
-    nav.classList.toggle("scrolled", window.scrollY > 50);
-});
-
-
-// ------------------ DARK MODE TOGGLE ------------------
-const toggleBtn = document.querySelector("#theme-toggle");
-
-if (toggleBtn) {
-    toggleBtn.addEventListener("click", () => {
-        document.body.classList.toggle("dark-theme");
-    });
-}
-
-
-// ------------------ SCROLL TO TOP BUTTON ------------------
-const topBtn = document.querySelector("#topBtn");
-
-window.onscroll = function () {
-    if (topBtn) {
-        if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
-            topBtn.style.display = "block";
-        } else {
-            topBtn.style.display = "none";
-        }
-    }
-};
-
-if (topBtn) {
-    topBtn.addEventListener("click", () => {
-        window.scrollTo({
-            top: 0,
-            behavior: "smooth"
-        });
-    });
-}
-
-
-// ------------------ ACTIVE NAV LINK ------------------
-const sections = document.querySelectorAll("section");
-const navLinks = document.querySelectorAll("nav a");
-
-window.addEventListener("scroll", () => {
-    let current = "";
-
-    sections.forEach(section => {
-        const sectionTop = section.offsetTop - 100;
-        if (pageYOffset >= sectionTop) {
-            current = section.getAttribute("id");
-        }
-    });
-
-    navLinks.forEach(link => {
-        link.classList.remove("active");
-        if (link.getAttribute("href").includes(current)) {
-            link.classList.add("active");
-        }
-    });
-});
+setInterval(drawMatrix, 33);

@@ -3,35 +3,107 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sandesh Jadhav | Introduction</title>
-
+    <title>sandesh jadhav | Pharmacy Portfolio</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;1,700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
-
 <body>
+    <nav>
+        <div class="logo">Pharma<span>Portfolio</span></div>
+        <ul class="nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#gallery">Certificates</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+        <button id="dark-mode-toggle"><i class="fas fa-moon"></i></button>
+    </nav>
 
-<section class="hero">
-    <div class="hero-content">
-        
-        <div class="profile-container">
-            <!-- FIXED image name (no space) -->
-            <img src="images/sandesh.jpeg" alt="Sandesh Jadhav" class="profile-img">
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <div class="profile-container">
+                <img src="images/Sandesh.jpeg" alt="sandesh jadhav" class="profile-img">
+            </div>
+            <h1>Hi, I'm sandesh jadhav</h1>
+            <p class="subtitle">Pharmacy Student | Healthcare Innovator | Tech Enthusiast</p>
         </div>
+    </section>
 
-        <h1>Hi, I'm Sandesh Jadhav</h1>
-
-        <p class="subtitle">
-            B.Pharmacy Student • Healthcare Enthusiast • Tech Explorer
-        </p>
-
-        <div class="hero-buttons">
-            <!-- Link to main page -->
-            <a href="main.html" class="btn">Enter Portfolio</a>
+    <section id="about" class="about-section">
+        <h2 class="section-title">About Me</h2>
+        <div class="about-container">
+            <div class="about-text">
+                <p>
+                    I am a dedicated <b>B.Pharmacy student</b> with a strong interest in healthcare and medicine. 
+                    I have good knowledge of pharmaceutical concepts and a passion for learning new things in the medical field.
+                </p>
+                <p>
+                    Along with my academic background, I have a strong skill in <b>HTML</b>, which helps me create simple and structured web pages. 
+                    I enjoy combining my technical skills with creativity to build useful and user-friendly designs.
+                </p>
+            </div>
+            
+            <div class="strengths-box">
+                <h3>Core Strengths</h3>
+                <ul>
+                    <li><i class="fas fa-check-circle"></i> Pharmaceutical Sciences</li>
+                    <li><i class="fas fa-check-circle"></i> Web Development (HTML)</li>
+                    <li><i class="fas fa-check-circle"></i> Quick Learner & Adaptable</li>
+                    <li><i class="fas fa-check-circle"></i> Teamwork & Problem-solving</li>
+                </ul>
+            </div>
         </div>
+    </section>
 
-    </div>
-</section>
+    <section id="projects">
+        <h2 class="section-title">Academic Projects</h2>
+        <div class="grid">
+            <div class="card">
+                <img src="images/Introduction to Modern AI (3).png" alt="Ai4A Project" class="project-img">
+                <h3>Ai4A Project</h3>
+                <p>Implementation of AI in Pharmaceutical research.</p>
+            </div>
+            <div class="card">
+                <img src="images/Sandesh cissco.png" alt="Cisco Project" class="project-img">
+                <h3>Cisco</h3>
+                <p>Clinical excellence and practice-based study.</p>
+            </div>
+        </div>
+    </section>
 
+    <section id="gallery">
+        <h2 class="section-title">Certification Gallery</h2>
+        <div class="gallery-grid">
+            <div class="gallery-item">
+                <img src="images/Introduction to Modern AI (3).png" alt="Modern AI certificate">
+                <p>Modern AI certificate</p>
+            </div>
+            <div class="gallery-item">
+                <img src="images/Sandesh cissco.png" alt="Netcad Certificate">
+                <p>Cisco Netcad</p>
+            </div>
+            <div class="gallery-item">
+                <img src="images/Sandesh yuva ai.png" alt="Yuva AI Certificate">
+                <p>Yuva AI Completion</p>
+            </div>
+        </div>
+    </section>
+
+    <footer id="contact">
+        <h2 class="section-title">Get In Touch</h2>
+        <div class="contact-info">
+            <p><i class="fas fa-phone"></i> +91 9876543210</p>
+            <p><i class="fas fa-envelope"></i> sandeshjadhav@gmail.com</p>
+            <div class="social-icons">
+                <a href="#"><i class="fab fa-linkedin"></i></a>
+                <a href="#"><i class="fab fa-github"></i></a>
+            </div>
+        </div>
+        <p class="copyright">&copy; 2024sandesh jadhav. All Rights Reserved.</p>
+    </footer>
+
+    <script src="script.js"></script>
 </body>
 </html>

@@ -1,32 +1,32 @@
-/* --- Card Glow Animation --- */
+/* ------------------ CARD GLOW EFFECT ------------------ */
 .card {
     position: relative;
     overflow: hidden;
-    backdrop-filter: blur(10px);
+    backdrop-filter: blur(12px);
+    border-radius: 12px;
 }
 
 .card::before {
     content: '';
     position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
+    inset: 0;
     background: linear-gradient(
-        90deg,
-        transparent,
-        rgba(0, 210, 255, 0.4),
-        transparent
+        120deg,
+        transparent 30%,
+        rgba(0, 210, 255, 0.5),
+        transparent 70%
     );
+    transform: translateX(-100%);
     animation: glowMove 3s linear infinite;
 }
 
 @keyframes glowMove {
-    0% { left: -100%; }
-    100% { left: 100%; }
+    to {
+        transform: translateX(100%);
+    }
 }
 
-/* --- Floating Particles --- */
+/* ------------------ FLOATING PARTICLES ------------------ */
 .particle {
     position: fixed;
     width: 6px;
@@ -35,6 +35,7 @@
     border-radius: 50%;
     opacity: 0.4;
     z-index: -1;
+    pointer-events: none;
     animation: floatUp linear infinite;
 }
 
@@ -43,43 +44,55 @@
         transform: translateY(100vh) scale(0.5);
         opacity: 0;
     }
-    50% { opacity: 0.5; }
+    50% {
+        opacity: 0.6;
+    }
     100% {
         transform: translateY(-10vh) scale(1);
         opacity: 0;
     }
 }
 
-/* --- Hero Glitch + Shine Effect --- */
+/* ------------------ HERO TEXT EFFECT ------------------ */
 .hero h1 {
     font-size: 3.5rem;
     font-weight: 800;
     text-transform: uppercase;
-    letter-spacing: 5px;
-    background: linear-gradient(90deg, #fff, #00d2ff, #ff00ff);
+    letter-spacing: 4px;
+
+    background: linear-gradient(90deg, #ffffff, #00d2ff, #ff00ff);
     background-size: 200%;
+
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    animation: textShine 4s linear infinite, glitch 2s infinite;
+
+    animation: textShine 4s linear infinite;
 }
 
 /* Shine Animation */
 @keyframes textShine {
-    0% { background-position: 0%; }
-    100% { background-position: 200%; }
+    from {
+        background-position: 0%;
+    }
+    to {
+        background-position: 200%;
+    }
 }
 
-/* Glitch Effect */
+/* OPTIONAL: Smooth Glitch on Hover (better UX) */
+.hero h1:hover {
+    animation: textShine 4s linear infinite, glitch 0.3s infinite;
+}
+
 @keyframes glitch {
     0% { transform: translate(0); }
-    20% { transform: translate(-2px, 2px); }
-    40% { transform: translate(2px, -2px); }
-    60% { transform: translate(-1px, 1px); }
-    80% { transform: translate(1px, -1px); }
+    25% { transform: translate(-2px, 2px); }
+    50% { transform: translate(2px, -2px); }
+    75% { transform: translate(-1px, 1px); }
     100% { transform: translate(0); }
 }
 
-/* --- Section Title Underline --- */
+/* ------------------ SECTION TITLE UNDERLINE ------------------ */
 .section-title {
     position: relative;
     display: inline-block;
@@ -89,18 +102,18 @@
     content: '';
     position: absolute;
     left: 0;
-    bottom: -5px;
+    bottom: -6px;
     width: 0;
     height: 3px;
     background: #00d2ff;
-    transition: 0.6s;
+    transition: width 0.5s ease;
 }
 
 .reveal.active .section-title::after {
     width: 100%;
 }
 
-/* --- Mobile Optimization --- */
+/* ------------------ MOBILE OPTIMIZATION ------------------ */
 @media (max-width: 768px) {
     .hero h1 {
         font-size: 2.2rem;

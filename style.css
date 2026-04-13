@@ -1,127 +1,116 @@
-/* ------------------ HERO SECTION ------------------ */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+    color: white;
+    scroll-behavior: smooth;
+}
+
+/* HERO */
 .hero {
     height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
     text-align: center;
-    position: relative;
-    z-index: 1;
-    overflow: hidden;
 }
 
-/* ------------------ ANIMATED BACKGROUND ------------------ */
-.hero::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(
-        -45deg,
-        #00d2ff,
-        #ff00ff,
-        #00ff88,
-        #ffcc00,
-        #00d2ff
-    );
-    background-size: 400% 400%;
-    animation: gradientMove 10s ease infinite;
-    opacity: 0.15;
-    z-index: -1;
-}
-
-@keyframes gradientMove {
-    0% { background-position: 0% }
-    50% { background-position: 100% }
-    100% { background-position: 0% }
-}
-
-/* ------------------ CONTENT ------------------ */
+/* GLASS EFFECT */
 .hero-content {
-    animation: fadeInUp 1.2s ease, floatHero 5s ease-in-out infinite;
+    backdrop-filter: blur(15px);
+    background: rgba(255,255,255,0.05);
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 0 30px rgba(0,255,255,0.2);
+    animation: fadeUp 1s ease;
 }
 
-/* ------------------ COLORFUL TEXT ------------------ */
-.hero h1 {
-    font-size: 3rem;
-    background: linear-gradient(
-        90deg,
-        #00d2ff,
-        #ff00ff,
-        #00ff88,
-        #ffffff
-    );
-    background-size: 300%;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    animation: textFlow 5s linear infinite;
-}
-
-@keyframes textFlow {
-    0% { background-position: 0% }
-    100% { background-position: 300% }
-}
-
-/* ------------------ PROFILE IMAGE GLOW ------------------ */
+/* PROFILE */
 .profile-img {
     width: 150px;
     height: 150px;
-    object-fit: cover;
-    margin-bottom: 20px;
     border-radius: 50%;
-    animation: glowPulse 3s infinite alternate;
-}
-
-@keyframes glowPulse {
-    0% {
-        box-shadow: 0 0 10px #00d2ff;
-    }
-    100% {
-        box-shadow: 
-            0 0 20px #00d2ff,
-            0 0 30px #ff00ff,
-            0 0 40px #00ff88;
-    }
-}
-
-/* ------------------ SUBTITLE ------------------ */
-.subtitle {
-    font-size: 1.2rem;
-    margin: 10px 0 20px;
-    color: #ccc;
-    letter-spacing: 1px;
-}
-
-/* ------------------ BUTTONS ------------------ */
-.hero-buttons {
-    margin-top: 20px;
-}
-
-.hero-buttons .btn {
-    margin: 10px;
-    display: inline-block;
-    padding: 10px 20px;
-    border-radius: 25px;
-    background: linear-gradient(270deg, #00d2ff, #ff00ff, #00ff88);
-    background-size: 300%;
-    animation: btnFlow 5s linear infinite;
+    border: 3px solid cyan;
+    margin-bottom: 20px;
     transition: 0.3s;
 }
 
-.hero-buttons .btn:hover {
+.profile-img:hover {
     transform: scale(1.1);
-    box-shadow: 
-        0 0 10px #00d2ff,
-        0 0 20px #ff00ff,
-        0 0 30px #00ff88;
 }
 
-@keyframes btnFlow {
-    0% { background-position: 0% }
-    100% { background-position: 300% }
+/* TEXT */
+h1 {
+    font-size: 2.5rem;
 }
 
-/* ------------------ HERO ANIMATION ------------------ */
-@keyframes fadeInUp {
+.subtitle {
+    margin: 10px 0;
+    color: #ccc;
+}
+
+/* BUTTON */
+.btn {
+    display: inline-block;
+    margin: 10px;
+    padding: 10px 20px;
+    background: cyan;
+    color: black;
+    border-radius: 25px;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.btn:hover {
+    background: white;
+}
+
+/* SECTIONS */
+section {
+    padding: 80px 10%;
+}
+
+/* CARDS */
+.grid {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.card {
+    flex: 1;
+    min-width: 250px;
+    padding: 20px;
+    border-radius: 15px;
+    background: rgba(255,255,255,0.05);
+    backdrop-filter: blur(10px);
+    transition: 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 0 20px cyan;
+}
+
+/* GALLERY */
+.gallery-grid {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.gallery-item img {
+    width: 100%;
+    border-radius: 10px;
+}
+
+/* ANIMATION */
+@keyframes fadeUp {
     from {
         opacity: 0;
         transform: translateY(40px);
@@ -130,11 +119,4 @@
         opacity: 1;
         transform: translateY(0);
     }
-}
-
-/* ------------------ FLOAT EFFECT ------------------ */
-@keyframes floatHero {
-    0% { transform: translateY(0px); }
-    50% { transform: translateY(-15px); }
-    100% { transform: translateY(0px); }
 }
